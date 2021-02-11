@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 // @ts-nocheck
-/* @relayHash d516c9f709cabcbc6d92546dbe0e85c0 */
+/* @relayHash 5e96f8b217a90ea3a1b4b27521bcfcfb */
 
 import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
@@ -12,10 +12,10 @@ export type PartnerArtworkInfiniteScrollGridQueryVariables = {
     count: number;
     cursor?: string | null;
     dimensionRange?: string | null;
+    geneIDs?: Array<string | null> | null;
     id: string;
     inquireableOnly?: boolean | null;
     majorPeriods?: Array<string | null> | null;
-    medium?: string | null;
     offerable?: boolean | null;
     priceRange?: string | null;
     sort?: string | null;
@@ -40,16 +40,16 @@ query PartnerArtworkInfiniteScrollGridQuery(
   $count: Int!
   $cursor: String
   $dimensionRange: String
+  $geneIDs: [String]
   $id: String!
   $inquireableOnly: Boolean
   $majorPeriods: [String]
-  $medium: String
   $offerable: Boolean
   $priceRange: String
   $sort: String
 ) {
   partner(id: $id) {
-    ...PartnerArtwork_partner_1LBhko
+    ...PartnerArtwork_partner_2xyT8c
     id
   }
 }
@@ -113,10 +113,10 @@ fragment InfiniteScrollArtworksGrid_connection on ArtworkConnectionInterface {
   }
 }
 
-fragment PartnerArtwork_partner_1LBhko on Partner {
+fragment PartnerArtwork_partner_2xyT8c on Partner {
   internalID
   slug
-  artworks: filterArtworksConnection(acquireable: $acquireable, after: $cursor, aggregations: [COLOR, DIMENSION_RANGE, MAJOR_PERIOD, MEDIUM, PRICE_RANGE], attributionClass: $attributionClass, color: $color, dimensionRange: $dimensionRange, first: $count, inquireableOnly: $inquireableOnly, majorPeriods: $majorPeriods, medium: $medium, offerable: $offerable, priceRange: $priceRange, sort: $sort) {
+  artworks: filterArtworksConnection(acquireable: $acquireable, after: $cursor, aggregations: [COLOR, DIMENSION_RANGE, MAJOR_PERIOD, MEDIUM, PRICE_RANGE], attributionClass: $attributionClass, color: $color, dimensionRange: $dimensionRange, geneIDs: $geneIDs, first: $count, inquireableOnly: $inquireableOnly, majorPeriods: $majorPeriods, offerable: $offerable, priceRange: $priceRange, sort: $sort) {
     aggregations {
       slice
       counts {
@@ -177,6 +177,11 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
+    "name": "geneIDs"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
     "name": "id"
   },
   {
@@ -188,11 +193,6 @@ var v0 = [
     "defaultValue": null,
     "kind": "LocalArgument",
     "name": "majorPeriods"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "medium"
   },
   {
     "defaultValue": null,
@@ -239,18 +239,18 @@ v5 = {
 },
 v6 = {
   "kind": "Variable",
-  "name": "inquireableOnly",
-  "variableName": "inquireableOnly"
+  "name": "geneIDs",
+  "variableName": "geneIDs"
 },
 v7 = {
   "kind": "Variable",
-  "name": "majorPeriods",
-  "variableName": "majorPeriods"
+  "name": "inquireableOnly",
+  "variableName": "inquireableOnly"
 },
 v8 = {
   "kind": "Variable",
-  "name": "medium",
-  "variableName": "medium"
+  "name": "majorPeriods",
+  "variableName": "majorPeriods"
 },
 v9 = {
   "kind": "Variable",
@@ -752,9 +752,9 @@ return {
               "attributionClass",
               "color",
               "dimensionRange",
+              "geneIDs",
               "inquireableOnly",
               "majorPeriods",
-              "medium",
               "offerable",
               "priceRange",
               "sort"
@@ -771,7 +771,7 @@ return {
     ]
   },
   "params": {
-    "id": "d516c9f709cabcbc6d92546dbe0e85c0",
+    "id": "5e96f8b217a90ea3a1b4b27521bcfcfb",
     "metadata": {},
     "name": "PartnerArtworkInfiniteScrollGridQuery",
     "operationKind": "query",
@@ -779,5 +779,5 @@ return {
   }
 };
 })();
-(node as any).hash = '07bae258d929897d4c852d053a8c265d';
+(node as any).hash = '4199d3195553f11b9223b9e3edd4d565';
 export default node;

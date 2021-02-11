@@ -10,22 +10,23 @@ import { capitalize, compact, forOwn, groupBy, sortBy } from "lodash"
 
 // General filter types and objects
 export enum FilterParamName {
-  artistIDs = "artistIDs",
   allowEmptyCreatedDates = "allowEmptyCreatedDates",
+  artistIDs = "artistIDs",
   artistsIFollow = "includeArtworksByFollowedArtists",
   attributionClass = "attributionClass",
   categories = "categories",
   color = "color",
   earliestCreatedYear = "earliestCreatedYear",
-  latestCreatedYear = "latestCreatedYear",
   estimateRange = "estimateRange",
   gallery = "partnerID",
+  geneIDs = "geneIDs",
   institution = "partnerID",
+  latestCreatedYear = "latestCreatedYear",
   medium = "medium",
   priceRange = "priceRange",
   size = "dimensionRange",
-  sort = "sort",
   sizes = "sizes",
+  sort = "sort",
   timePeriod = "majorPeriods",
   viewAs = "viewAs",
   waysToBuyBid = "atAuction",
@@ -44,10 +45,11 @@ export enum FilterDisplayName {
   artistIDs = "Artists",
   artistsIFollow = "Artist",
   attributionClass = "Rarity",
-  color = "Color",
   categories = "Medium",
+  color = "Color",
   estimateRange = "Price/estimate range",
   gallery = "Gallery",
+  geneIDs = "Category",
   institution = "Institution",
   medium = "Medium",
   priceRange = "Price",
@@ -56,8 +58,8 @@ export enum FilterDisplayName {
   sort = "Sort by",
   timePeriod = "Time period",
   viewAs = "View as",
-  year = "Artwork date",
   waysToBuy = "Ways to buy",
+  year = "Artwork date",
 }
 
 export enum ViewAsValues {
@@ -185,6 +187,18 @@ export const selectedOption = ({
   aggregations: Aggregations
 }) => {
   const multiSelectedOptions = selectedOptions.filter((option) => option.paramValue === true)
+
+  if (filterScreen === "geneIDs") {
+    const geneIDsOption = selectedOptions.find((option) => {
+      return option.paramName === FilterParamName.geneIDs
+    })
+
+    if (geneIDsOption?.paramValue && Array.isArray(geneIDsOption?.paramValue) && geneIDsOption?.paramValue.length > 0) {
+      return geneIDsOption?.paramValue.map(capitalize).join(", ")
+    }
+
+    return "All"
+  }
 
   if (filterScreen === "attributionClass") {
     const selectedAttributionClassOption = selectedOptions.find((option) => {

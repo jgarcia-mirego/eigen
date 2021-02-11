@@ -31,6 +31,7 @@ import { ColorOption, ColorOptionsScreen } from "../ArtworkFilterOptions/ColorOp
 import { colorHexMap } from "../ArtworkFilterOptions/ColorSwatch"
 import { EstimateRangeOptionsScreen } from "../ArtworkFilterOptions/EstimateRangeOptions"
 import { GalleryOptionsScreen } from "../ArtworkFilterOptions/GalleryOptions"
+import { GeneIDsOptionsScreen } from "../ArtworkFilterOptions/GeneIDsOptions"
 import { InstitutionOptionsScreen } from "../ArtworkFilterOptions/InstitutionOptions"
 import { MediumOptionsScreen } from "../ArtworkFilterOptions/MediumOptions"
 import { PriceRangeOptionsScreen } from "../ArtworkFilterOptions/PriceRangeOptions"
@@ -47,20 +48,21 @@ export type FilterScreen =
   | "artistIDs"
   | "artistsIFollow"
   | "attributionClass"
-  | "color"
   | "categories"
+  | "color"
   | "dimensionRange"
   | "estimateRange"
   | "gallery"
+  | "geneIDs"
   | "institution"
   | "majorPeriods"
   | "medium"
   | "priceRange"
-  | "sort"
   | "sizes"
+  | "sort"
   | "viewAs"
-  | "year"
   | "waysToBuy"
+  | "year"
 
 export interface FilterDisplayConfig {
   filterType: FilterScreen
@@ -95,11 +97,13 @@ interface FilterModalProps extends ViewProperties {
 // tslint:disable-next-line:interface-over-type-literal
 export type FilterModalNavigationStack = {
   ArtistIDsOptionsScreen: undefined
-  ColorOptionsScreen: undefined
   AttributionClassOptionsScreen: undefined
+  CategoriesOptionsScreen: undefined
+  ColorOptionsScreen: undefined
   EstimateRangeOptionsScreen: undefined
   FilterOptionsScreen: FilterOptionsScreenParams
   GalleryOptionsScreen: undefined
+  GeneIDsOptionsScreen: undefined
   InstitutionOptionsScreen: undefined
   MediumOptionsScreen: undefined
   PriceRangeOptionsScreen: undefined
@@ -108,9 +112,8 @@ export type FilterModalNavigationStack = {
   SortOptionsScreen: undefined
   TimePeriodOptionsScreen: undefined
   ViewAsOptionsScreen: undefined
-  YearOptionsScreen: undefined
   WaysToBuyOptionsScreen: undefined
-  CategoriesOptionsScreen: undefined
+  YearOptionsScreen: undefined
 }
 
 const Stack = createStackNavigator<FilterModalNavigationStack>()
@@ -208,6 +211,7 @@ export const FilterModalNavigator: React.FC<FilterModalProps> = (props) => {
             <Stack.Screen name="ColorOptionsScreen" component={ColorOptionsScreen} />
             <Stack.Screen name="EstimateRangeOptionsScreen" component={EstimateRangeOptionsScreen} />
             <Stack.Screen name="GalleryOptionsScreen" component={GalleryOptionsScreen} />
+            <Stack.Screen name="GeneIDsOptionsScreen" component={GeneIDsOptionsScreen} />
             <Stack.Screen name="InstitutionOptionsScreen" component={InstitutionOptionsScreen} />
             <Stack.Screen name="MediumOptionsScreen" component={MediumOptionsScreen} />
             <Stack.Screen name="PriceRangeOptionsScreen" component={PriceRangeOptionsScreen} />
@@ -663,7 +667,7 @@ const filterKeyFromAggregation: Record<AggregationName, FilterParamName | string
   GALLERY: "gallery",
   INSTITUTION: "institution",
   MAJOR_PERIOD: FilterParamName.timePeriod,
-  MEDIUM: FilterParamName.medium,
+  MEDIUM: FilterParamName.geneIDs,
   PRICE_RANGE: FilterParamName.priceRange,
   FOLLOWED_ARTISTS: "artistsIFollow",
   ARTIST: "artistIDs",
@@ -706,6 +710,11 @@ export const filterOptionToDisplayConfigMap: Record<string, FilterDisplayConfig>
     displayText: FilterDisplayName.gallery,
     filterType: "gallery",
     ScreenComponent: "GalleryOptionsScreen",
+  },
+  geneIDs: {
+    displayText: FilterDisplayName.geneIDs,
+    filterType: "geneIDs",
+    ScreenComponent: "GeneIDsOptionsScreen",
   },
   institution: {
     displayText: FilterDisplayName.institution,
@@ -757,6 +766,7 @@ export const filterOptionToDisplayConfigMap: Record<string, FilterDisplayConfig>
 const CollectionFiltersSorted: FilterScreen[] = [
   "sort",
   "medium",
+  "geneIDs",
   "attributionClass",
   "priceRange",
   "waysToBuy",
@@ -769,6 +779,7 @@ const CollectionFiltersSorted: FilterScreen[] = [
 const ArtistArtworksFiltersSorted: FilterScreen[] = [
   "sort",
   "medium",
+  "geneIDs",
   "attributionClass",
   "priceRange",
   "waysToBuy",
@@ -781,6 +792,7 @@ const ArtistArtworksFiltersSorted: FilterScreen[] = [
 const ArtistSeriesFiltersSorted: FilterScreen[] = [
   "sort",
   "medium",
+  "geneIDs",
   "attributionClass",
   "priceRange",
   "waysToBuy",
@@ -795,6 +807,7 @@ const FairFiltersSorted: FilterScreen[] = [
   "artistIDs",
   "artistsIFollow",
   "medium",
+  "geneIDs",
   "attributionClass",
   "priceRange",
   "waysToBuy",
@@ -804,6 +817,6 @@ const FairFiltersSorted: FilterScreen[] = [
   "gallery",
   "institution",
 ]
-const SaleArtworksFiltersSorted: FilterScreen[] = ["sort", "viewAs", "estimateRange", "artistIDs", "medium"]
+const SaleArtworksFiltersSorted: FilterScreen[] = ["sort", "viewAs", "estimateRange", "artistIDs", "medium", "geneIDs"]
 
 const AuctionResultsFiltersSorted: FilterScreen[] = ["sort", "categories", "sizes", "year"]
