@@ -8,18 +8,19 @@ import { MultiSelectOptionScreen } from "./MultiSelectOption"
 
 const DEFAULT_OPTION: FilterData = {
   displayText: "All",
-  paramValue: ParamDefaultValues.geneIDs,
-  paramName: FilterParamName.geneIDs,
+  paramValue: ParamDefaultValues.additionalGeneIDs,
+  paramName: FilterParamName.additionalGeneIDs,
 }
 
-interface GeneIDsOptionsScreenProps extends StackScreenProps<FilterModalNavigationStack, "GeneIDsOptionsScreen"> {}
+interface AdditionalGeneIDsOptionsScreenProps
+  extends StackScreenProps<FilterModalNavigationStack, "AdditionalGeneIDsOptionsScreen"> {}
 
-export const GeneIDsOptionsScreen: React.FC<GeneIDsOptionsScreenProps> = ({ navigation }) => {
+export const AdditionalGeneIDsOptionsScreen: React.FC<AdditionalGeneIDsOptionsScreenProps> = ({ navigation }) => {
   // Uses the medium aggregations
   const { aggregation } = useArtworkFiltersAggregation({ paramName: FilterParamName.medium })
 
-  // But updates the geneIDs option
-  const { dispatch, selectedOption } = useArtworkFiltersAggregation({ paramName: FilterParamName.geneIDs })
+  // But updates the additionalGeneIDs option
+  const { dispatch, selectedOption } = useArtworkFiltersAggregation({ paramName: FilterParamName.additionalGeneIDs })
 
   const [nextOptions, setNextOptions] = useState<string[]>((selectedOption?.paramValue as string[]) ?? [])
 
@@ -27,7 +28,7 @@ export const GeneIDsOptionsScreen: React.FC<GeneIDsOptionsScreenProps> = ({ navi
     DEFAULT_OPTION,
     ...(aggregation?.counts ?? []).map(({ name: displayText, value: paramValue, count }) => {
       return {
-        paramName: FilterParamName.geneIDs,
+        paramName: FilterParamName.additionalGeneIDs,
         displayText,
         paramValue,
         count,
@@ -50,7 +51,7 @@ export const GeneIDsOptionsScreen: React.FC<GeneIDsOptionsScreenProps> = ({ navi
 
         // If the `All` toggle is selected; reset the filters to the default value (`[]`)
         if (option.displayText === DEFAULT_OPTION.displayText) {
-          next = ParamDefaultValues.geneIDs
+          next = ParamDefaultValues.additionalGeneIDs
         } else {
           // Otherwise append it
           next = [
@@ -85,7 +86,7 @@ export const GeneIDsOptionsScreen: React.FC<GeneIDsOptionsScreenProps> = ({ navi
 
         // If nothing is selected toggle the default value (`[]`)
         if (next.length === 0) {
-          next = ParamDefaultValues.geneIDs
+          next = ParamDefaultValues.additionalGeneIDs
         }
 
         dispatch({
@@ -105,7 +106,7 @@ export const GeneIDsOptionsScreen: React.FC<GeneIDsOptionsScreenProps> = ({ navi
   return (
     <MultiSelectOptionScreen
       onSelect={handleSelect}
-      filterHeaderText={FilterDisplayName.geneIDs}
+      filterHeaderText={FilterDisplayName.additionalGeneIDs}
       filterOptions={booleanFilterOptions}
       navigation={navigation}
     />

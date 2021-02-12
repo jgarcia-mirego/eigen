@@ -905,7 +905,7 @@ return {
                   "attributionClass",
                   "color",
                   "dimensionRange",
-                  "geneIDs",
+                  "additionalGeneIDs",
                   "inquireableOnly",
                   "majorPeriods",
                   "offerable",

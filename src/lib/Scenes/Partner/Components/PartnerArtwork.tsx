@@ -67,7 +67,7 @@ export const PartnerArtworkFragmentContainer = createPaginationContainer(
         count: { type: "Int", defaultValue: 10 }
         cursor: { type: "String" }
         dimensionRange: { type: "String", defaultValue: "*-*" }
-        geneIDs: { type: "[String]" }
+        additionalGeneIDs: { type: "[String]" }
         inquireableOnly: { type: "Boolean" }
         majorPeriods: { type: "[String]" }
         offerable: { type: "Boolean" }
@@ -83,7 +83,7 @@ export const PartnerArtworkFragmentContainer = createPaginationContainer(
           attributionClass: $attributionClass
           color: $color
           dimensionRange: $dimensionRange
-          geneIDs: $geneIDs
+          additionalGeneIDs: $additionalGeneIDs
           first: $count
           inquireableOnly: $inquireableOnly
           majorPeriods: $majorPeriods
@@ -129,7 +129,7 @@ export const PartnerArtworkFragmentContainer = createPaginationContainer(
         $count: Int!
         $cursor: String
         $dimensionRange: String
-        $geneIDs: [String]
+        $additionalGeneIDs: [String]
         $id: String!
         $inquireableOnly: Boolean
         $majorPeriods: [String]
@@ -146,7 +146,7 @@ export const PartnerArtworkFragmentContainer = createPaginationContainer(
               count: $count
               cursor: $cursor
               dimensionRange: $dimensionRange
-              geneIDs: $geneIDs
+              additionalGeneIDs: $additionalGeneIDs
               inquireableOnly: $inquireableOnly
               majorPeriods: $majorPeriods
               offerable: $offerable

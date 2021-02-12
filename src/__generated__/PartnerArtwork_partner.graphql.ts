@@ -44,6 +44,11 @@ const node: ReaderFragment = {
     {
       "defaultValue": null,
       "kind": "LocalArgument",
+      "name": "additionalGeneIDs"
+    },
+    {
+      "defaultValue": null,
+      "kind": "LocalArgument",
       "name": "attributionClass"
     },
     {
@@ -65,11 +70,6 @@ const node: ReaderFragment = {
       "defaultValue": "*-*",
       "kind": "LocalArgument",
       "name": "dimensionRange"
-    },
-    {
-      "defaultValue": null,
-      "kind": "LocalArgument",
-      "name": "geneIDs"
     },
     {
       "defaultValue": null,
@@ -135,6 +135,11 @@ const node: ReaderFragment = {
           "variableName": "acquireable"
         },
         {
+          "kind": "Variable",
+          "name": "additionalGeneIDs",
+          "variableName": "additionalGeneIDs"
+        },
+        {
           "kind": "Literal",
           "name": "aggregations",
           "value": [
@@ -159,11 +164,6 @@ const node: ReaderFragment = {
           "kind": "Variable",
           "name": "dimensionRange",
           "variableName": "dimensionRange"
-        },
-        {
-          "kind": "Variable",
-          "name": "geneIDs",
-          "variableName": "geneIDs"
         },
         {
           "kind": "Variable",
@@ -326,5 +326,5 @@ const node: ReaderFragment = {
   "type": "Partner",
   "abstractKey": null
 };
-(node as any).hash = 'b3e96a9f5ac44a210173586a47a7e558';
+(node as any).hash = '9b2ebf026165e0508e7452e1aff0f5ec';
 export default node;

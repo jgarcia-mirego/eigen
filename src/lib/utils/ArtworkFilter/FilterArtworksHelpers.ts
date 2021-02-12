@@ -10,6 +10,7 @@ import { capitalize, compact, forOwn, groupBy, sortBy } from "lodash"
 
 // General filter types and objects
 export enum FilterParamName {
+  additionalGeneIDs = "additionalGeneIDs",
   allowEmptyCreatedDates = "allowEmptyCreatedDates",
   artistIDs = "artistIDs",
   artistsIFollow = "includeArtworksByFollowedArtists",
@@ -19,7 +20,6 @@ export enum FilterParamName {
   earliestCreatedYear = "earliestCreatedYear",
   estimateRange = "estimateRange",
   gallery = "partnerID",
-  geneIDs = "geneIDs",
   institution = "partnerID",
   latestCreatedYear = "latestCreatedYear",
   medium = "medium",
@@ -42,6 +42,7 @@ export type FilterParams = {
 
 export enum FilterDisplayName {
   // artist = "Artists",
+  additionalGeneIDs = "Category",
   artistIDs = "Artists",
   artistsIFollow = "Artist",
   attributionClass = "Rarity",
@@ -49,7 +50,6 @@ export enum FilterDisplayName {
   color = "Color",
   estimateRange = "Price/estimate range",
   gallery = "Gallery",
-  geneIDs = "Category",
   institution = "Institution",
   medium = "Medium",
   priceRange = "Price",
@@ -188,13 +188,17 @@ export const selectedOption = ({
 }) => {
   const multiSelectedOptions = selectedOptions.filter((option) => option.paramValue === true)
 
-  if (filterScreen === "geneIDs") {
-    const geneIDsOption = selectedOptions.find((option) => {
-      return option.paramName === FilterParamName.geneIDs
+  if (filterScreen === "additionalGeneIDs") {
+    const additionalGeneIDsOption = selectedOptions.find((option) => {
+      return option.paramName === FilterParamName.additionalGeneIDs
     })
 
-    if (geneIDsOption?.paramValue && Array.isArray(geneIDsOption?.paramValue) && geneIDsOption?.paramValue.length > 0) {
-      return geneIDsOption?.paramValue.map(capitalize).join(", ")
+    if (
+      additionalGeneIDsOption?.paramValue &&
+      Array.isArray(additionalGeneIDsOption?.paramValue) &&
+      additionalGeneIDsOption?.paramValue.length > 0
+    ) {
+      return additionalGeneIDsOption?.paramValue.map(capitalize).join(", ")
     }
 
     return "All"
